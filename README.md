@@ -44,7 +44,7 @@ Ground truth price for March 4, 2023~March31, 2023 is not given and model predic
     
     - Custom dataset other than reference data already set up for the module (i.e., ETTh, ETTm, electricity, weather, etc.) must follow format as below. Data pivoting of the original train set was necessary.
 
-    ![train_data_pivoted_by_timestamp.png]()
+    ![train_data_pivoted_by_timestamp.png](https://github.com/wschung1113/jeju_specialty_patch_tst/blob/main/images/train_data_pivoted_by_timestamp.png)
 
 2. pre-train model in a self-supervised way (patchtst_pretrain.py)
     
@@ -52,13 +52,13 @@ Ground truth price for March 4, 2023~March31, 2023 is not given and model predic
     
     + datautils.py modifications
         
-        ![datautils_mod_1.png]()
+        ![datautils_mod_1.png](https://github.com/wschung1113/jeju_specialty_patch_tst/blob/main/images/datautils_mod_1.png)
 
-        ![datautils_mod_2.png]()
+        ![datautils_mod_2.png](https://github.com/wschung1113/jeju_specialty_patch_tst/blob/main/images/datautils_mod_2.png)
     
     + pred_dataset.py modifications
         
-        ![pred_dataset_mod_1.png]()
+        ![pred_dataset_mod_1.png](https://github.com/wschung1113/jeju_specialty_patch_tst/blob/main/images/pred_dataset_mod_1.png)
 
     b. Execute patchtst_pretrain.py from root with custom arguments
 
