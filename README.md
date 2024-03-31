@@ -8,9 +8,9 @@
 
 ## introduction
 
-For the previous two endeavors to predict price of Jeju island specialties, I have tried by applying AutoGluon-TS, timeseries forecasting library from Amazon, and with tree-based regression models.
+For the previous two endeavors to predict price of Jeju island specialties, I have tried applying AutoGluon-TS, a timeseries forecasting library from Amazon, and analyzing using tree-based regression models.
 
-This time, again, I will go with the traditional timeseries forecasting methodology. _PatchTST_ is a novel transformer-based long term timeseries forecasting model architecture recently developed by Yuqi Nie and accepted to ICLR 2023.
+This time, again, I will go with using timeseries forecasting model PatchTST. _PatchTST_ is a novel transformer-based long term timeseries forecasting model architecture recently developed by Yuqi Nie and accepted to ICLR 2023.
 
 Many AutoML libraries such as AutoGluon-TS, NeuralForecast, tsai have adopted this model but I wanted to try adopting the _official module_ and also go through the code for better understanding.
 
@@ -42,7 +42,7 @@ Ground truth price for March 4, 2023~March31, 2023 is not given and model predic
 ### steps
 1. pivot data (make_data.py)
     
-    - Custom dataset other than reference data already set up for the module (i.e., ETTh, ETTm, electricity, weather, etc.) must follow format as below. Data pivoting of the original train set was necessary.
+    - Custom dataset other than reference data already set up for the module (i.e., ETTh, ETTm, electricity, weather, etc.) must follow format as below. Data pivoting of the original train set was necessary. You may skip or modify the module for your own use.
 
     ![train_data_pivoted_by_timestamp.png](https://github.com/wschung1113/jeju_specialty_patch_tst/blob/main/images/train_data_pivoted_by_timestamp.png)
 
@@ -96,3 +96,6 @@ Ground truth price for March 4, 2023~March31, 2023 is not given and model predic
 
 3. make a prediction with the finetuned model (???.py)
     
+    a. Execute ???.py from root with custom arguments
+
+    b. transform data into submission format
