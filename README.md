@@ -77,4 +77,22 @@ Ground truth price for March 4, 2023~March31, 2023 is not given and model predic
     python patchtst_pretrain.py --dset jeju_specialty --context_points=365 --target_points=28 --n_epochs_pretrain=10 --pretrained_model_id=13 --features='M'  --mask_ratio 0.4
     ```
 
+2. finetune model for timeseries forecasting (patchtst_finetune.py)
+
+    a. Execute patchtst_finetune.py from root with custom arguments
+
+    + --is_finetune refers to whether this execution is a finetune job
+    + --dset refers to your custom dataset alias that was added in _DSETS_ list in datautils.py
+    + --dset_finetune refers to the dataset to be used for finetuning
+    + --context_points refers to the length of look-back window
+    + --target_points refers to the prediction horizon length
+    + --n_epochs_finetune is self-explanatory, number of epochs for finetuning
+    + --features refers to the feature size of your custom dataset ('M', 'MS', 'S')
+    + --pretrained_model refers to the path starting from root to the saved weights of the pre-trained model
+    + --finetune_model_id refers to the model ID to be given to the finetuned model
+    ```bash
+    python patchtst_finetune.py --is_finetune=1 --dset jeju_specialty --dset_finetune=jeju_specialty --context_points=365 --target_points=28 --n_epochs_finetune=100 --features='M' --pretrained_model=./saved_models/jeju_specialty/masked_patchtst/based_model/patchtst_pretrained_cw365_patch12_stride12_epochs-pretrain100_mask0.4_model13.pth --finetuned_model_id=13
+    ```
+
+3. make a prediction with the finetuned model (???.py)
     
