@@ -224,7 +224,8 @@ class Learner(GetAttr):
         self('before_predict')
         if dl is None: return
         self.dl = dl
-        self.n_inp = dl.dataset.n_inp                
+        # self.n_inp = dl.dataset.n_inp                
+        self.n_inp = 1              
         self.model.eval()        #  model at evaluation mode  
         with torch.no_grad(): self.all_batches('predict')        
         self('after_predict')

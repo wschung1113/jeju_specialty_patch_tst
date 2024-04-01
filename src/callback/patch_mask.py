@@ -78,7 +78,8 @@ def create_patch(xb, patch_len, stride):
     num_patch = (max(seq_len, patch_len)-patch_len) // stride + 1
     tgt_len = patch_len  + stride*(num_patch-1)
     s_begin = seq_len - tgt_len
-        
+    
+    print(xb.shape)
     xb = xb[:, s_begin:, :]                                                    # xb: [bs x tgt_len x nvars]
     xb = xb.unfold(dimension=1, size=patch_len, step=stride)                 # xb: [bs x num_patch x n_vars x patch_len]
     return xb, num_patch

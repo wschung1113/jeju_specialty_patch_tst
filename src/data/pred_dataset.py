@@ -521,5 +521,16 @@ class Dataset_Pred(Dataset):
         return self.scaler.inverse_transform(data)
 
 
+class Dataset_Pred_Jeju(Dataset):
+    def __init__(self, data):
+        self.data = data
+        
+    def __len__(self):
+        return len(self.data)
+    
+    def __getitem__(self, idx):
+        return torch.tensor(self.data[idx], dtype=torch.float)
+
+
 def _torch(*dfs):
     return tuple(torch.from_numpy(x).float() for x in dfs)

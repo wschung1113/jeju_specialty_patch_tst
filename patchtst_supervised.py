@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import torch
 from torch import nn
+from torch.utils.data import Dataset, DataLoader
 
 from src.models.patchTST import PatchTST
 from src.learner import Learner
@@ -15,8 +16,10 @@ from src.callback.patch_mask import *
 from src.callback.transforms import *
 from src.metrics import *
 from datautils import get_dls
+from src.data.pred_dataset import Dataset_Pred_Jeju
 
 from make_data import get_jeju_data, pivot_jeju_data
+
 
 import argparse
 
@@ -157,14 +160,16 @@ def pred_func():
     # get callbacks
     cbs = [RevInCB(args.c_in)] if args.revin else []
     cbs += [PatchCB(patch_len=args.patch_len, stride=args.stride)]
-    learn = Learner(dls, model, cbs=cbs)
+    learn = Learner(None, model, cbs=cbs)
     
     df = get_jeju_data()
     pivot_df = pivot_jeju_data(df)
     input_tensor = torch.tensor(pivot_df.iloc[-args.context_points:, 1:].values)
     
     # TODO 아래 predict 함수에 DataSet, DataLoader, BatchSize 파라미터 다 넣기
-    out  = learn.predict(input_tensor, weight_path=args.weight_path)         # out: to_numpy(pred)
+    ds = Dataset_Pred_Jeju(input_tensor)
+    dl = DataLoader(ds, batch_size=1)
+    out  = learn.predict(dl, args.weight_path)         # out: to_numpy(pred)
     return out
 
 if __name__ == '__main__':
